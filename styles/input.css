@@ -1,0 +1,90 @@
+/* Input processing: the citation context editor, title and abstract. */
+
+/* ---------------------------------------------------------
+   INPUT PANEL
+--------------------------------------------------------- */
+.hint { margin: 0 0 16px; color: var(--muted); line-height: 1.6; }
+
+.field { margin-bottom: 16px; }
+.field-label { display: block; margin-bottom: 6px; font-weight: 600; font-size: 13px; }
+.field-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 6px;
+}
+.counter { color: var(--muted); font-size: 12px; font-variant-numeric: tabular-nums; }
+.counter.limit { color: var(--danger); }
+
+.field-error {
+  margin-bottom: 8px;
+  padding: 8px 10px;
+  border-left: 3px solid var(--danger);
+  border-radius: 4px;
+  background: var(--danger-soft);
+  color: var(--danger);
+  font-size: 13px;
+}
+
+/* The textarea is transparent and sits on top of a mirror div that paints the
+   [cite] highlights; both must share identical font, padding and wrapping. */
+.editor { position: relative; }
+.editor-highlight,
+#context-input {
+  margin: 0;
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font: 15px/1.65 var(--serif);
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+}
+.editor-highlight {
+  position: absolute;
+  inset: 0;
+  color: transparent;
+  overflow: hidden;
+  pointer-events: none;
+  border-color: transparent;
+}
+.editor-highlight mark {
+  background: var(--accent-soft);
+  color: transparent;
+  border-radius: 3px;
+  box-shadow: 0 0 0 2px var(--accent-soft);
+}
+#context-input {
+  position: relative;
+  display: block;
+  width: 100%;
+  min-height: 170px;
+  resize: none;
+  overflow: hidden; /* height is auto-grown in JS */
+  background: transparent;
+  color: var(--text);
+}
+#context-input.invalid { border-color: var(--danger); }
+.editor:focus-within .editor-highlight { border-color: transparent; }
+#context-input:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+
+input[type=text], textarea.plain {
+  width: 100%;
+  padding: 9px 12px;
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font: 14px/1.5 var(--serif);
+  resize: vertical;
+}
+
+.checkbox-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 14px;
+  color: var(--muted);
+  cursor: pointer;
+  user-select: none;
+}
+.checkbox-row input { accent-color: var(--accent); }

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SciteKG — Local Citation Recommendation</title>
+<link rel="stylesheet" href="styles/base.css">
+<link rel="stylesheet" href="styles/input.css">
+<link rel="stylesheet" href="styles/recommendations.css">
+<link rel="stylesheet" href="styles/graph.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.28.1/cytoscape.min.js" defer></script>
+<script type="module" src="js/main.js"></script>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">SciteKG</div>
+  <div class="subtitle">Local citation recommendation demo</div>
+</header>
+
+<main class="layout">
+
+  <!-- LEFT: INPUT -->
+  <section class="panel input-panel">
+    <div class="panel-head">
+      <h2>Citation context</h2>
+    </div>
+
+    <div class="panel-body">
+      <p class="hint">
+        Paste a passage from your manuscript and mark the missing reference with
+        <code>[cite]</code>. The model ranks the best-matching papers in the knowledge graph.
+      </p>
+
+      <div class="field">
+        <div class="field-error" id="context-error" hidden></div>
+        <div class="editor">
+          <div class="editor-highlight" id="context-highlight" aria-hidden="true"></div>
+          <textarea id="context-input" maxlength="1200" spellcheck="false"
+            placeholder="Prior work has shown that heterogeneous graph neural networks outperform homogeneous baselines [cite], particularly when metapath structure is preserved."></textarea>
+        </div>
+        <div class="field-foot">
+          <button class="btn btn-ghost btn-sm" id="btn-cite" type="button">Insert [cite]</button>
+          <span class="counter" id="counter"></span>
+        </div>
+      </div>
+
+      <label class="checkbox-row">
+        <input type="checkbox" id="toggle-extra">
+        Add the cited paper's title and abstract
+      </label>
+
+      <div class="extra-fields" id="extra-fields" hidden>
+        <div class="field">
+          <label class="field-label" for="title-input">Title</label>
+          <input type="text" id="title-input" placeholder="Paper title">
+        </div>
+        <div class="field">
+          <label class="field-label" for="abstract-input">Abstract</label>
+          <textarea id="abstract-input" class="plain" rows="4" placeholder="Paper abstract"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel-foot">
+      <button class="btn btn-secondary" id="btn-example" type="button">Load random example</button>
+      <button class="btn btn-primary" id="btn-submit" type="button">
+        Rank papers <kbd>Ctrl ↵</kbd>
+      </button>
+    </div>
+  </section>
+
+  <!-- RIGHT: RESULTS -->
+  <section class="panel results-panel">
+    <div class="panel-head">
+      <h2>Recommendations</h2>
+      <div class="head-actions">
+        <span class="status" id="status">Ready</span>
+      </div>
+    </div>
+
+    <div class="empty-state" id="empty-state">
+      <p class="empty-title">No results yet</p>
+      <p>Enter a citation context and rank papers to see candidates and their citation neighbourhood.</p>
+    </div>
+
+    <div class="results-body" id="results-body" hidden>
+      <div class="ranked-list" id="ranked-list"></div>
+
+      <div class="graph-section">
+        <div class="graph-head">
+          <h3 id="graph-title">Neighbourhood</h3>
+          <span class="graph-hint">Arrows follow citations. Double-click a paper to re-center on it.</span>
+          <button class="btn btn-ghost btn-sm" id="btn-back" type="button" hidden>← Back</button>
+          <button class="btn btn-secondary btn-sm" id="btn-full-graph" type="button">View full graph</button>
+        </div>
+        <div class="legend" id="legend">
+          <span class="legend-item static"><i class="shape shape-selected"></i>Selected paper</span>
+          <button class="legend-item" type="button" data-layer="references" aria-pressed="true">
+            <i class="shape shape-ref"></i>Papers it cites <span class="count"></span>
+          </button>
+          <button class="legend-item" type="button" data-layer="cited_by" aria-pressed="true">
+            <i class="shape shape-citing"></i>Papers citing it <span class="count"></span>
+          </button>
+          <button class="legend-item" type="button" data-layer="authors" aria-pressed="true">
+            <i class="shape shape-author"></i>Authors <span class="count"></span>
+          </button>
+          <button class="legend-item" type="button" data-layer="contexts" aria-pressed="true">
+            <i class="shape shape-context"></i>Citation contexts <span class="count"></span>
+          </button>
+        </div>
+        <div class="pagers" id="pagers" hidden>
+          <div class="pager" data-layer="references" hidden>
+            <span class="pager-name">Papers it cites</span>
+            <button class="btn btn-ghost btn-sm" type="button" data-step="-1" aria-label="Previous page">‹</button>
+            <span class="pager-range"></span>
+            <button class="btn btn-ghost btn-sm" type="button" data-step="1" aria-label="Next page">›</button>
+          </div>
+          <div class="pager" data-layer="cited_by" hidden>
+            <span class="pager-name">Papers citing it</span>
+            <button class="btn btn-ghost btn-sm" type="button" data-step="-1" aria-label="Previous page">‹</button>
+            <span class="pager-range"></span>
+            <button class="btn btn-ghost btn-sm" type="button" data-step="1" aria-label="Next page">›</button>
+          </div>
+          <div class="pager" data-layer="authors" hidden>
+            <span class="pager-name">Authors</span>
+            <button class="btn btn-ghost btn-sm" type="button" data-step="-1" aria-label="Previous page">‹</button>
+            <span class="pager-range"></span>
+            <button class="btn btn-ghost btn-sm" type="button" data-step="1" aria-label="Next page">›</button>
+          </div>
+        </div>
+        <div class="graph-wrap">
+          <div id="graph"></div>
+          <div class="graph-tip" id="graph-tip" hidden></div>
+          <p class="graph-note" id="graph-note" hidden></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- DETAIL PANEL — shown on node click (paper, author or citation context) -->
+<aside id="paper-panel" class="paper-panel" aria-label="Details">
+  <div class="paper-panel-inner">
+    <button id="paper-panel-close" class="paper-panel-close" aria-label="Close">×</button>
+    <span class="kind-chip" id="pp-kind">Paper</span>
+    <h3 id="pp-title">—</h3>
+    <div class="paper-panel-meta" id="pp-meta"></div>
+    <div class="paper-panel-actions">
+      <button class="btn btn-secondary btn-sm" id="pp-copy-uri" type="button">Copy URI</button>
+      <button class="btn btn-secondary btn-sm cite-btn" id="pp-cite" type="button" title="Copy BibTeX" hidden>
+        <span class="icon-quote"></span>Cite
+      </button>
+      <button class="btn btn-secondary btn-sm" id="pp-copy-title" type="button">Copy title</button>
+      <button class="btn btn-primary-soft btn-sm" id="pp-explore" type="button" hidden>Explore from here</button>
+    </div>
+
+    <div class="paper-panel-section" id="pp-authors-section">
+      <h4>Authors</h4>
+      <div id="pp-authors">—</div>
+    </div>
+    <div class="paper-panel-section" id="pp-abstract-section">
+      <h4>Abstract</h4>
+      <div id="pp-abstract">—</div>
+    </div>
+    <div class="paper-panel-section" id="pp-papers-section" hidden>
+      <h4>Papers in the knowledge graph</h4>
+      <ul class="paper-list" id="pp-papers"></ul>
+    </div>
+    <div class="paper-panel-section" id="pp-context-section" hidden>
+      <h4 id="pp-context-heading">Passage</h4>
+      <blockquote class="paper-panel-context">
+        <span class="marker" id="pp-context-marker"></span>
+        <span class="around" id="pp-context-before"></span>
+        <span class="passage" id="pp-context-text"></span>
+        <span class="around" id="pp-context-after"></span>
+      </blockquote>
+    </div>
+  </div>
+</aside>
+
+<div class="toast" id="toast" role="status"></div>
+
+</body>
+</html>

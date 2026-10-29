@@ -1,0 +1,160 @@
+/* Graph: neighbourhood, legend, pagers, detail panel and the full-page view. */
+
+/* ---------------------------------------------------------
+   GRAPH
+--------------------------------------------------------- */
+.graph-section { flex: 1; min-height: 380px; display: flex; flex-direction: column; }
+.graph-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 8px; }
+.graph-head h3 { font-size: 13px; font-weight: 600; }
+.graph-hint { margin-right: auto; color: var(--muted); font-size: 12px; }
+
+.pagers { display: flex; flex-wrap: wrap; gap: 6px 16px; margin-bottom: 10px; }
+.pager { display: flex; align-items: center; gap: 4px; font-size: 12px; }
+.pager-name { margin-right: 4px; color: var(--muted); }
+.pager-range { min-width: 74px; text-align: center; font-variant-numeric: tabular-nums; }
+.pager .btn { padding: 1px 9px; font-size: 15px; line-height: 1.3; }
+.pager .btn:disabled { opacity: 0.3; cursor: default; }
+
+.legend { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+.legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 4px 10px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--text);
+  font: 12px var(--sans);
+}
+button.legend-item { cursor: pointer; transition: opacity 0.15s, border-color 0.15s; }
+button.legend-item:hover { border-color: var(--muted); }
+button.legend-item[aria-pressed="false"] { opacity: 0.45; text-decoration: line-through; }
+.legend-item .count { color: var(--muted); font-variant-numeric: tabular-nums; }
+
+/* legend swatches mirror the node shapes in the graph */
+.shape { display: inline-block; width: 11px; height: 11px; flex: none; }
+.shape-selected { width: 13px; height: 13px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+.shape-ref { border-radius: 50%; background: var(--role-ref); }
+.shape-citing { border-radius: 50%; background: var(--role-citing); }
+.shape-author { background: var(--kind-author); transform: rotate(45deg) scale(0.8); }
+.shape-context { width: 13px; height: 8px; border-radius: 3px; background: var(--kind-context); }
+
+.graph-wrap {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+#graph { position: absolute; inset: 0; }
+.graph-tip {
+  position: absolute;
+  z-index: 5;
+  max-width: 280px;
+  padding: 6px 10px;
+  background: var(--text);
+  color: var(--bg);
+  border-radius: 6px;
+  font-size: 12px;
+  line-height: 1.45;
+  pointer-events: none;
+  transform: translate(-50%, 22px);
+}
+.graph-note {
+  position: absolute;
+  inset: auto 0 12px 0;
+  margin: 0;
+  text-align: center;
+  color: var(--muted);
+  font-size: 13px;
+  pointer-events: none;
+}
+
+/* ---------------------------------------------------------
+   PAPER DETAIL PANEL
+--------------------------------------------------------- */
+.paper-panel {
+  position: fixed;
+  top: 0;
+  right: -440px;
+  z-index: 50;
+  width: 420px;
+  max-width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  background: var(--surface);
+  border-left: 1px solid var(--border);
+  box-shadow: -8px 0 32px rgba(0, 0, 0, 0.14);
+  transition: right 0.22s ease;
+}
+.paper-panel.open { right: 0; }
+.paper-panel-inner { position: relative; padding: 24px 24px 40px; }
+.paper-panel-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  padding: 2px 10px;
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-size: 24px;
+  cursor: pointer;
+}
+.paper-panel-close:hover { color: var(--accent); }
+
+#pp-title { margin: 0 28px 6px 0; font: 600 18px/1.35 var(--serif); }
+.kind-chip {
+  display: inline-block;
+  margin-bottom: 8px;
+  padding: 1px 9px;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 600;
+}
+.paper-panel-meta { margin-bottom: 14px; color: var(--muted); font-size: 13px; white-space: pre-line; }
+.btn-primary-soft { background: var(--accent-soft); color: var(--accent); }
+.btn-primary-soft:hover { border-color: var(--accent); }
+
+.paper-list { margin: 0; padding-left: 18px; font: 14px/1.5 var(--serif); }
+.paper-list li { margin-bottom: 6px; }
+.paper-panel-actions { display: flex; gap: 8px; margin-bottom: 22px; }
+
+.paper-panel-section { margin-bottom: 20px; }
+.paper-panel-section h4 { margin-bottom: 6px; font-size: 13px; color: var(--muted); font-weight: 600; }
+.paper-panel-section > div { line-height: 1.6; }
+#pp-abstract { font-family: var(--serif); font-size: 14.5px; line-height: 1.65; }
+
+.paper-panel-context {
+  margin: 0;
+  padding: 10px 14px;
+  background: var(--surface-2);
+  border-left: 3px solid var(--accent);
+  border-radius: 4px;
+  font: 14px/1.65 var(--serif);
+}
+.paper-panel-context .marker {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--accent);
+  font: 12px var(--mono);
+}
+.paper-panel-context .marker:empty { display: none; }
+.paper-panel-context .around { color: var(--muted); }
+.paper-panel-context .passage { background: var(--accent-soft); border-radius: 3px; }
+
+/* ---------------------------------------------------------
+   FULL-PAGE GRAPH VIEW — everything except the graph is hidden
+--------------------------------------------------------- */
+body.full-view { height: 100vh; }
+body.full-view .topbar,
+body.full-view .input-panel,
+body.full-view .results-panel > .panel-head,
+body.full-view .ranked-list,
+body.full-view .pagers { display: none; }
+body.full-view .layout { grid-template-columns: 1fr; padding-top: 16px; }
+body.full-view .results-body { padding: 16px 20px 20px; }
+body.full-view .graph-section { min-height: 0; }
