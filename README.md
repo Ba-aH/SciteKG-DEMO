@@ -4,7 +4,6 @@
 
 Paste a passage from a manuscript, mark the missing reference with `[cite]`, and the app ranks the papers in a scholarly knowledge graph that best fit that spot. Then look at each recommendation in context: the papers it cites, the papers that cite it, its authors, and the passages where those citations occur.
 
-> CiteLens is a working name. Change it here and in the header of `index.html` if you pick another.
 
 <!-- Add a screenshot or GIF: save it as docs/screenshot.png and uncomment the next line -->
 <!-- ![CiteLens screenshot](docs/screenshot.png) -->
