@@ -8,6 +8,10 @@ Paste a passage from a manuscript, mark the missing reference with `[cite]`, and
 <!-- Add a screenshot or GIF: save it as docs/screenshot.png and uncomment the next line -->
 <!-- ![CiteLens screenshot](docs/screenshot.png) -->
 
+## Models and datasets
+
+[Open the Google Drive folder](https://drive.google.com/drive/folders/1doBbU2dwPtiFmDTLaAEp5zqkdOoI2ueV?usp=drive_link) for access to the models and datasets. The folder contains the files you need to place inside this project's `models` and `data` folders.
+
 ## Features
 
 **Recommendations**
@@ -40,6 +44,8 @@ Paste a passage from a manuscript, mark the missing reference with `[cite]`, and
 - **Model.** At startup the backend loads a trained checkpoint, encodes every candidate paper once, and ranks them against the encoded context by dot-product similarity.
 - **Knowledge graph.** A Turtle file is loaded into memory with rdflib. Titles, authors and the whole neighbourhood graph come from SPARQL queries against it.
 - **Frontend.** Plain ES modules with no build step. [Cytoscape.js](https://js.cytoscape.org/) draws the graph and is loaded from a CDN.
+
+
 
 ### Expected RDF structure
 
