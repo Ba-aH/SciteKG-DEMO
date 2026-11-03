@@ -2,15 +2,13 @@
 
 **An interactive web app for testing a local citation recommendation model and exploring the knowledge graph behind it.**
 
-Paste a passage from a manuscript, mark the missing reference with `[cite]`, and the app ranks the papers in a scholarly knowledge graph that best fit that spot. Then look at each recommendation in context: the papers it cites, the papers that cite it, its authors, and the passages where those citations occur.
 
 
-<!-- Add a screenshot or GIF: save it as docs/screenshot.png and uncomment the next line -->
-<!-- ![CiteLens screenshot](docs/screenshot.png) -->
+## Models & Datasets
 
-## Models and datasets
+Download the required models and datasets from the Google Drive folder below, then place the files into the project's `models/` and `data/` directories.
 
-[Open the Google Drive folder](https://drive.google.com/drive/folders/1doBbU2dwPtiFmDTLaAEp5zqkdOoI2ueV?usp=drive_link) for access to the models and datasets. The folder contains the files you need to place inside this project's `models` and `data` folders.
+**[📁 Open Google Drive folder](https://drive.google.com/drive/folders/1doBbU2dwPtiFmDTLaAEp5zqkdOoI2ueV?usp=drive_link)**
 
 ## Features
 
