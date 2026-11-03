@@ -6,7 +6,8 @@ import { setStatus } from './shared/ui.js';
 
 const recommendations = initRecommendations({
   // a clicked card (or the top result of a new ranking) becomes the center of the graph
-  onSelect: (result) => graph.selectFromList(result.uri, result.title)
+  onSelect: (result) => graph.selectFromList(result.uri, result.title),
+  onViewDetails: (result) => graph.showPaperDetails(result.uri)
 });
 
 const graph = initGraph({

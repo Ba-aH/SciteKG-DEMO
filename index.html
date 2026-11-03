@@ -97,10 +97,10 @@
         <div class="legend" id="legend">
           <span class="legend-item static"><i class="shape shape-selected"></i>Selected paper</span>
           <button class="legend-item" type="button" data-layer="references" aria-pressed="true">
-            <i class="shape shape-ref"></i>Papers it cites <span class="count"></span>
+            <i class="shape shape-ref"></i>Cited Papers <span class="count"></span>
           </button>
           <button class="legend-item" type="button" data-layer="cited_by" aria-pressed="true">
-            <i class="shape shape-citing"></i>Papers citing it <span class="count"></span>
+            <i class="shape shape-citing"></i>Citing Papers <span class="count"></span>
           </button>
           <button class="legend-item" type="button" data-layer="authors" aria-pressed="true">
             <i class="shape shape-author"></i>Authors <span class="count"></span>
@@ -108,16 +108,22 @@
           <button class="legend-item" type="button" data-layer="contexts" aria-pressed="true">
             <i class="shape shape-context"></i>Citation contexts <span class="count"></span>
           </button>
+          <span class="legend-item static">
+            <i class="arrow-swatch arrow-cited" aria-hidden="true"></i>cito:hasCitedEntity 
+          </span>
+          <span class="legend-item static">
+            <i class="arrow-swatch arrow-citing" aria-hidden="true"></i>cito:hasCitingEntity 
+          </span>
         </div>
         <div class="pagers" id="pagers" hidden>
           <div class="pager" data-layer="references" hidden>
-            <span class="pager-name">Papers it cites</span>
+            <span class="pager-name">Cited Papers</span>
             <button class="btn btn-ghost btn-sm" type="button" data-step="-1" aria-label="Previous page">‹</button>
             <span class="pager-range"></span>
             <button class="btn btn-ghost btn-sm" type="button" data-step="1" aria-label="Next page">›</button>
           </div>
           <div class="pager" data-layer="cited_by" hidden>
-            <span class="pager-name">Papers citing it</span>
+            <span class="pager-name">Citing Papers</span>
             <button class="btn btn-ghost btn-sm" type="button" data-step="-1" aria-label="Previous page">‹</button>
             <span class="pager-range"></span>
             <button class="btn btn-ghost btn-sm" type="button" data-step="1" aria-label="Next page">›</button>
@@ -148,12 +154,13 @@
     <h3 id="pp-title">—</h3>
     <div class="paper-panel-meta" id="pp-meta"></div>
     <div class="paper-panel-actions">
-      <button class="btn btn-secondary btn-sm" id="pp-copy-uri" type="button">Copy URI</button>
+      <!-- <button class="btn btn-secondary btn-sm" id="pp-copy-title" type="button">Copy title</button> -->
+      <!-- <button class="btn btn-secondary btn-sm" id="pp-copy-journal" type="button" hidden>Copy journal</button> -->
+      <!-- <button class="btn btn-secondary btn-sm" id="pp-copy-uri" type="button">Copy URI</button> -->
+      <button class="btn btn-primary-soft btn-sm" id="pp-explore" type="button" hidden>Explore from here</button>
       <button class="btn btn-secondary btn-sm cite-btn" id="pp-cite" type="button" title="Copy BibTeX" hidden>
         <span class="icon-quote"></span>Cite
       </button>
-      <button class="btn btn-secondary btn-sm" id="pp-copy-title" type="button">Copy title</button>
-      <button class="btn btn-primary-soft btn-sm" id="pp-explore" type="button" hidden>Explore from here</button>
     </div>
 
     <div class="paper-panel-section" id="pp-authors-section">
@@ -165,11 +172,11 @@
       <div id="pp-abstract">—</div>
     </div>
     <div class="paper-panel-section" id="pp-papers-section" hidden>
-      <h4>Papers in the knowledge graph</h4>
+      <h4>More of this author’s work in the knowledge graph</h4>
       <ul class="paper-list" id="pp-papers"></ul>
     </div>
     <div class="paper-panel-section" id="pp-context-section" hidden>
-      <h4 id="pp-context-heading">Passage</h4>
+      <h4 id="pp-context-heading">Citation Context</h4>
       <blockquote class="paper-panel-context">
         <span class="marker" id="pp-context-marker"></span>
         <span class="around" id="pp-context-before"></span>

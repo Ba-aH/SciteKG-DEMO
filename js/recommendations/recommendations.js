@@ -1,15 +1,17 @@
 // Recommendation list: runs the ranking and shows the cards. Selecting a card is reported through onSelect.
-import { $, copyText, el, setStatus } from '../shared/ui.js';
+import { $, el, setStatus } from '../shared/ui.js';
 import { citeButton } from '../shared/bibtex.js';
 import { apiPredict } from './api.js';
 
 const TOPK = 20;
 
 let onSelect = () => {};
+let onViewDetails = () => {};
 
-// onSelect(result) runs when a card is clicked, and for the top result of every new ranking
+// onSelect(result) selects a card or the top result; onViewDetails(result) opens its paper details.
 export function initRecommendations(callbacks){
   onSelect = callbacks.onSelect;
+  onViewDetails = callbacks.onViewDetails ?? (() => {});
   return { rank, highlight };
 }
 
@@ -43,7 +45,7 @@ function resultSummary(results, expectedUri){
   let summary = `${results.length} candidates`;
   if (expectedUri){
     const hit = results.find(r => r.uri === expectedUri);
-    summary += hit ? ` · expected paper at rank ${hit.rank}` : ` · expected paper not in top ${results.length}`;
+    summary += hit ? ` · gold paper at rank ${hit.rank}` : ` · gold paper not in top ${results.length}`;
   }
   return summary;
 }
@@ -52,14 +54,8 @@ function renderResults(ranked, expectedUri){
   $('empty-state').hidden = true;
   $('results-body').hidden = false;
 
-  const scores = ranked.map(r => r.score);
-  const min = Math.min(...scores);
-  const max = Math.max(...scores);
-  // bar width is relative within this ranking: best = 100%, worst = 8% so every bar stays visible
-  const barWidth = (score) => max === min ? 100 : 8 + 92 * (score - min) / (max - min);
-
   $('ranked-list').replaceChildren(
-    ...ranked.map(r => resultCard(r, barWidth(r.score), r.uri === expectedUri))
+    ...ranked.map(r => resultCard(r, r.score * 100, r.uri === expectedUri))
   );
   onSelect(ranked[0]);
 }
@@ -72,7 +68,7 @@ function resultCard(result, barPct, isExpected){
     el('span', { className: 'score-bar' }, bar),
     el('span', { className: 'score', textContent: result.score.toFixed(4) })
   );
-  if (isExpected) meta.append(el('span', { className: 'badge', textContent: 'expected' }));
+  if (isExpected) meta.append(el('span', { className: 'badge', textContent: 'Gold paper' }));
 
   const select = el('button', { className: 'rank-select', onclick: () => onSelect(result) },
     el('span', { className: 'rank-num', textContent: result.rank }),
@@ -83,20 +79,27 @@ function resultCard(result, barPct, isExpected){
   );
 
   const actions = el('div', { className: 'rank-actions' },
-    el('button', {
-      className: 'btn btn-ghost btn-sm',
-      textContent: 'Copy URI',
-      onclick: () => copyText(result.uri, 'URI')
-    }),
-    el('button', {
-      className: 'btn btn-ghost btn-sm',
-      textContent: 'Copy title',
-      onclick: () => copyText(result.title, 'Title')
-    }),
+    recommendationAction('view-details', 'View details', () => onViewDetails(result)),
+    recommendationAction('view-graph', 'View graph', () => onSelect(result)),
     citeButton(result.uri)
   );
 
   const card = el('article', { className: 'rank-card' + (isExpected ? ' expected' : '') }, select, actions);
   card.dataset.uri = result.uri;
   return card;
+}
+
+function recommendationAction(icon, label, onclick){
+  const image = el('img', {
+    className: 'rank-action-icon',
+    src: `assets/${icon}.png`,
+    alt: '',
+    onerror: (event) => { event.currentTarget.hidden = true; }
+  });
+  return el('button', {
+    className: 'btn btn-primary-soft btn-sm rank-action-button',
+    type: 'button',
+    title: label,
+    onclick
+  }, image, label);
 }

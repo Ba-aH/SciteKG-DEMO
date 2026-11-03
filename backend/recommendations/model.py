@@ -26,10 +26,10 @@ _ckpt = torch.load(config.CHECKPOINT_PATH, map_location=DEVICE)
 _a = _ckpt.get("args", {})
 
 paper_tower = PaperTower(
-    feat_keys=["P", "PP", "PCCon"], nfeat=768,
+    feat_keys=["P", "PCCon"], nfeat=768,
     hidden=_a.get("hidden", 500), embed_dim=_a.get("embed_dim", 768),
     n_fp_layers=_a.get("n_fp_layers", 2), dropout=_a.get("dropout", 0.25),
-    input_drop=_a.get("input_drop", 0.25), att_drop=0.1, num_heads=1,
+    input_drop=_a.get("input_drop", 0.25), att_drop=0.1, num_heads=5,
     act="none", residual=True, use_mlp=_a.get("use_mlp", True),
 ).to(DEVICE)
 paper_tower.load_state_dict(_ckpt["paper_tower"])

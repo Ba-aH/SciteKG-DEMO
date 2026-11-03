@@ -58,7 +58,7 @@ export async function buildGraphAround(topUri, topTitle, { offsets, full }){
       // a citation always runs citing → cited
       const [source, target] = role === 'references' ? [topUri, paper.uri] : [paper.uri, topUri];
       const ctx = paper.context;
-      // the direct edge is replaced by source → context → target while contexts are visible
+      // the direct edge is replaced by outward context → paper edges while contexts are visible
       addEdge(source, target, { role, layer: role, replacedByContext: Boolean(ctx) });
       if (!ctx) return;
 
@@ -67,8 +67,8 @@ export async function buildGraphAround(topUri, topTitle, { offsets, full }){
         kind: 'context', layer: 'contexts', anchor: role, ...ctx, citingTitle, citedTitle, label: '',
         tip: `${ctx.marker ?? 'Citation context'}: ${truncateTitle(ctx.text, 160)}`
       }, polar(angle, radius - LAYOUT.contextOffset));
-      addEdge(source, ctx.uri, { role, layer: 'contexts', anchor: role });
-      addEdge(ctx.uri, target, { role, layer: 'contexts', anchor: role });
+      addEdge(ctx.uri, source, { role, layer: 'contexts', anchor: role, contextTarget: 'citing' });
+      addEdge(ctx.uri, target, { role, layer: 'contexts', anchor: role, contextTarget: 'cited' });
     });
   }
 

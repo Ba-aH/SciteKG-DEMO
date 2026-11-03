@@ -82,6 +82,8 @@ export function graphStyle(){
     },
     { selector: 'edge[role = "references"]', style: { 'line-color': color.references, 'target-arrow-color': color.references } },
     { selector: 'edge[role = "cited_by"]', style: { 'line-color': color.cited_by, 'target-arrow-color': color.cited_by } },
+    { selector: 'edge[contextTarget = "citing"]', style: { 'line-color': color.cited_by, 'target-arrow-color': color.cited_by } },
+    { selector: 'edge[contextTarget = "cited"]', style: { 'line-color': color.references, 'target-arrow-color': color.references } },
     {
       selector: 'edge[role = "authors"]',
       style: { 'line-color': color.authors, 'line-style': 'dotted', 'target-arrow-shape': 'none' }

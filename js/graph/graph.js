@@ -22,7 +22,11 @@ export function initGraph(callbacks){
     else if (state.fullView) leaveFullView();
   });
 
-  return { selectFromList };
+  return { selectFromList, showPaperDetails };
+}
+
+function showPaperDetails(uri){
+  return openPaperPanel(uri, null, 'selected');
 }
 
 // a fresh selection (from the recommendation list) starts a new trail

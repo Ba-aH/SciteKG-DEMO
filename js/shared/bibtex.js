@@ -48,7 +48,8 @@ export async function copyBibtex(uri){
 
 export function citeButton(uri){
   return el('button', {
-    className: 'btn btn-ghost btn-sm cite-btn',
+    className: 'btn btn-primary-soft btn-sm cite-btn rank-action-button',
+    type: 'button',
     title: 'Copy BibTeX',
     onclick: () => copyBibtex(uri)
   }, el('span', { className: 'icon-quote' }), 'Cite');

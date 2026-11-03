@@ -1,6 +1,7 @@
 import { apiPaperDetail } from '../shared/api.js';
 import { copyBibtex } from '../shared/bibtex.js';
-import { $, copyText, el } from '../shared/ui.js';
+import { $, el } from '../shared/ui.js';
+// import { copyText } from '../shared/ui.js';
 import { apiAuthorDetail } from './api.js';
 
 /* ---------------------------------------------------------
@@ -14,16 +15,17 @@ let getSelectedUri = () => null;
 let onExplore = () => {};
 const PANEL_SECTIONS = ['authors', 'abstract', 'papers', 'context'];
 
-function beginPanel({ kind, title, meta = '', uri, copyLabel, sections }){
+function beginPanel({ kind, title, meta = '', uri, /* copyLabel, */ sections }){
   panelUri = uri;
   paperPanel.classList.add('open');
   $('pp-kind').textContent = kind;
   $('pp-title').textContent = title;
   $('pp-meta').textContent = meta;
-  $('pp-copy-uri').onclick = () => copyText(uri, 'URI');
-  $('pp-copy-title').textContent = `Copy ${copyLabel}`;
-  $('pp-copy-title').onclick = () => copyText($('pp-title').textContent, copyLabel);
+  // $('pp-copy-uri').onclick = () => copyText(uri, 'URI');
+  // $('pp-copy-title').textContent = `Copy ${copyLabel}`;
+  // $('pp-copy-title').onclick = () => copyText($('pp-title').textContent, copyLabel);
   $('pp-cite').hidden = true;
+  // $('pp-copy-journal').hidden = true;
   $('pp-explore').hidden = true;
   PANEL_SECTIONS.forEach(name => { $(`pp-${name}-section`).hidden = !sections.includes(name); });
 }
@@ -40,7 +42,7 @@ function fillContext(ctx, heading){
 }
 
 export async function openPaperPanel(uri, citationContext, role){
-  beginPanel({ kind: 'Paper', title: 'Loading…', uri, copyLabel: 'title', sections: ['authors', 'abstract', 'context'] });
+  beginPanel({ kind: 'Paper', title: 'Loading…', uri, /* copyLabel: 'title', */ sections: ['authors', 'abstract', 'context'] });
   $('pp-authors').textContent = '—';
   $('pp-abstract').textContent = '—';
   fillContext(null);
@@ -56,12 +58,16 @@ export async function openPaperPanel(uri, citationContext, role){
   if (panelUri !== uri) return; // the user clicked another node meanwhile
 
   $('pp-title').textContent = meta.title || '(no title)';
-  $('pp-meta').textContent = [meta.year, meta.venue].filter(Boolean).join(' · ') || shortId(uri);
+  // $('pp-meta').textContent = [meta.year, meta.venue].filter(Boolean).join(' · ') || shortId(uri);
   $('pp-authors').textContent = meta.authors?.length ? meta.authors.join(', ') : '—';
   $('pp-abstract').textContent = meta.abstract || '(no abstract available)';
 
   $('pp-cite').hidden = false;
   $('pp-cite').onclick = () => copyBibtex(uri);
+  // if (meta.venue && !/^https?:/.test(meta.venue)){
+  //   $('pp-copy-journal').hidden = false;
+  //   $('pp-copy-journal').onclick = () => copyText(meta.venue, 'Journal');
+  // }
 
   // re-center the graph on any neighbor to keep exploring the KG
   $('pp-explore').hidden = uri === getSelectedUri();
@@ -71,12 +77,12 @@ export async function openPaperPanel(uri, citationContext, role){
   };
 
   fillContext(citationContext, role === 'references'
-    ? 'Passage where the selected paper cites it'
-    : 'Passage where it cites the selected paper');
+    ? 'Citation contexts where the selected paper cites this paper'
+    : 'Citation contexts where this paper cites the selected paper');
 }
 
 export async function openAuthorPanel(uri, name){
-  beginPanel({ kind: 'Author', title: name, uri, copyLabel: 'name', sections: ['papers'] });
+  beginPanel({ kind: 'Author', title: name, uri, /* copyLabel: 'name', */ sections: ['papers'] });
   const list = $('pp-papers');
   list.replaceChildren(el('li', { textContent: 'Loading…' }));
 
@@ -101,11 +107,11 @@ export function openContextPanel(ctx){
     title: ctx.marker || 'Citation context',
     meta: `Citing paper: ${ctx.citingTitle}\nCited paper: ${ctx.citedTitle}`,
     uri: ctx.uri,
-    copyLabel: 'passage',
+    // copyLabel: 'passage',
     sections: ['context']
   });
-  $('pp-copy-title').onclick = () => copyText(ctx.text ?? '', 'Passage');
-  fillContext(ctx, 'Passage');
+  // $('pp-copy-title').onclick = () => copyText(ctx.text ?? '', 'Passage');
+  fillContext(ctx, 'Citation Context');
 }
 
 export const closePanel = () => paperPanel.classList.remove('open');

@@ -19,8 +19,11 @@
   --match-soft: #e0f3ea;
   --danger: #b3392b;
   --danger-soft: #fbeeec;
+  --gold: #a9791c;
+  --gold-soft: #fdf7e6;
+  --gold-border: #e9d59b;
   /* graph encoding: color = role relative to the selected paper, shape = entity type */
-  --role-ref: #0d9488;      /* papers the selected paper cites */
+  --role-ref: #16a34a;      /* papers the selected paper cites */
   --role-citing: #d97706;   /* papers citing the selected paper */
   --kind-author: #7c3aed;
   --kind-context: #64748b;
