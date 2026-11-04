@@ -15,9 +15,6 @@ Download the required models and datasets from the Google Drive folder below, th
 Clone the repository and set up a virtual environment:
 
 ```bash
-git clone https://github.com/Ba-aH/SciteKG-DEMO.git
-cd SciteKG-DEMO
-
 # Create virtual environment
 python -m venv venv
 
@@ -29,7 +26,8 @@ source venv/bin/activate
 venv\Scripts\activate
 
 # Install dependencies
-pip install -r requirements.txt
+pip install -r requirements.tx
+```
 
 ## Features
 
