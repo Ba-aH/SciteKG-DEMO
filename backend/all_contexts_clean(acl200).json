@@ -1,10 +1,10 @@
 [
   {
-    "context": "The self‑training experiments of OTHERCIT yielded disappointing results, but OTHERCIT found that self‑training could be effective when the seed training set is very small [cite]. Subsequent work reports positive outcomes, although their protocol cannot be considered pure self‑training because the first‑stage Charniak parser is retrained.",
+    "context": "The self‑training experiments yielded disappointing results, but OTHERCIT found that self‑training could be effective when the seed training set is very small [cite]. Subsequent work reports positive outcomes, although their protocol cannot be considered pure self‑training because the first‑stage Charniak parser is retrained.",
     "cited_uri": "https://citekg.org/resource/paper/51537926f709364a",
     "citing_uri": "https://citekg.org/resource/paper/008d9b85ff2a8893",
     "citing_idx": 0,
-    "context_original": "g process. The selftraining experiments of OTHERCIT also yielded disappointing results. OTHERCIT found, on the other hand, that selftraining could be effective if the seed training set was very small. <mask> also report positive results from self-training, but the selftraining protocol that they use cannot be considered to be pure self-training as the first-stage Charniak parser  is retrained on",
+    "context_original": "g process. The selftraining experiments also yielded disappointing results. OTHERCIT found, on the other hand, that selftraining could be effective if the seed training set was very small. also report positive results from self-training, but the selftraining protocol that they use cannot be considered to be pure self-training as the first-stage Charniak parser  is retrained on",
     "clean_status": "ok"
   },
   {
@@ -12,7 +12,7 @@
     "cited_uri": "https://citekg.org/resource/paper/d7ee179c2b75fb47",
     "citing_uri": "https://citekg.org/resource/paper/0109dc73df3d0927",
     "citing_idx": 1,
-    "context_original": "romise for great potential : • the two texts are no longer written in the same language (cross-linguality); • the entailment needs to be queried in both directions (content synchronization). <mask> presented initial research directions and experiments for the cross-lingual context and explored possible application scenarios. 2 Theoretical Background The semantic similarity formula from",
+    "context_original": "romise for great potential : • the two texts are no longer written in the same language (cross-linguality); • the entailment needs to be queried in both directions (content synchronization). presented initial research directions and experiments for the cross-lingual context and explored possible application scenarios. 2 Theoretical Background The semantic similarity formula from",
     "clean_status": "ok"
   },
   {
@@ -20,7 +20,7 @@
     "cited_uri": "https://citekg.org/resource/paper/dff712b83c82bc4f",
     "citing_uri": "https://citekg.org/resource/paper/01a7a210138b31eb",
     "citing_idx": 3,
-    "context_original": "hrough counting similarities of their sub-structures. Among the different proposed methods, two of the most effective approaches are Subset Tree (SST) kernel  and Partial Tree Kernel (PTK) ( <mask> . The SST kernel generalizes the subtree kernel , which considers all common subtrees in the tree representation of two compared sentences. In other words, two subtrees are identical if the",
+    "context_original": "hrough counting similarities of their sub-structures. Among the different proposed methods, two of the most effective approaches are Subset Tree (SST) kernel  and Partial Tree Kernel (PTK) ( . The SST kernel generalizes the subtree kernel , which considers all common subtrees in the tree representation of two compared sentences. In other words, two subtrees are identical if the",
     "clean_status": "ok"
   },
   {
@@ -28,15 +28,15 @@
     "cited_uri": "https://citekg.org/resource/paper/20ae9394697f3204",
     "citing_uri": "https://citekg.org/resource/paper/012c60c6f254fce4",
     "citing_idx": 2,
-    "context_original": "nguistics Over the past decades, many state-of-the-art parsing algorithm were proposed, such as head-word lexicalized PCFG , Maximum Entropy , Maximum/Minimum spanning tree (MST) ( <mask> , Bottom-up deterministic parsing , and Constant-time deterministic parsing . Among them, the Nivre’s algorithm  was shown to be most efficient method, which only costs a",
+    "context_original": "nguistics Over the past decades, many state-of-the-art parsing algorithm were proposed, such as head-word lexicalized PCFG , Maximum Entropy , Maximum/Minimum spanning tree (MST) ( , Bottom-up deterministic parsing , and Constant-time deterministic parsing . Among them, the Nivre’s algorithm  was shown to be most efficient method, which only costs a",
     "clean_status": "ok"
   },
   {
-    "context": "We propose the use of new DT structures, which improve on the structures defined in OTHERCIT [cite] with the most general DTK, the Partial Tree Kernel (PTK), and this yields significant performance gains.",
+    "context": "We propose the use of new DT structures, which improve on the structures defined in [cite] with the most general DTK, the Partial Tree Kernel (PTK), and this yields significant performance gains.",
     "cited_uri": "https://citekg.org/resource/paper/dff712b83c82bc4f",
     "citing_uri": "https://citekg.org/resource/paper/01a7a210138b31eb",
     "citing_idx": 4,
-    "context_original": "ollowing: • We propose the use of new DT structures, which are improvement on the structures defined in OTHERCIT with the most general (in terms of substructures) DTK, i.e. Partial Tree Kernel (PTK) ( <mask> . • We firstly propose the use of the Unlexicalized PTK  with our dependency structures, which significantly improves PTK. • We compare the performance of the proposed DTKs on PPI with the o",
+    "context_original": "ollowing: • We propose the use of new DT structures, which are improvement on the structures defined in OTHERCIT with the most general (in terms of substructures) DTK, i.e. Partial Tree Kernel (PTK) ( . • We firstly propose the use of the Unlexicalized PTK  with our dependency structures, which significantly improves PTK. • We compare the performance of the proposed DTKs on PPI with the o",
     "clean_status": "ok"
   },
   {
@@ -44,15 +44,15 @@
     "cited_uri": "https://citekg.org/resource/paper/efd6f3cea0c4ae35",
     "citing_uri": "https://citekg.org/resource/paper/0200169276885cbd",
     "citing_idx": 6,
-    "context_original": "er, word lattices have later been used to represent various forms of input ambiguity, mainly at the level of token boundaries (e.g. word segmentation, morphological decomposition, word decompounding ( <mask> ). A main problem when dealing with permutations is that the lattice size can grow very quickly when medium to long reorderings are represented. We are particularly concerned with this issue because o",
+    "context_original": "er, word lattices have later been used to represent various forms of input ambiguity, mainly at the level of token boundaries (e.g. word segmentation, morphological decomposition, word decompounding ( ). A main problem when dealing with permutations is that the lattice size can grow very quickly when medium to long reorderings are represented. We are particularly concerned with this issue because o",
     "clean_status": "ok"
   },
   {
-    "context": "Many small comparisons of pronoun‑resolution methods have been made, such as by <mask> and OTHERCIT [cite]; however, these studies typically rely on statistics from a limited hand‑tested corpus, making evaluation time‑consuming and difficult.",
+    "context": "Many small comparisons of pronoun‑resolution methods have been made, such as by and [cite]; however, these studies typically rely on statistics from a limited hand‑tested corpus, making evaluation time‑consuming and difficult.",
     "cited_uri": "https://citekg.org/resource/paper/b6c15a9dd7d53e4d",
     "citing_uri": "https://citekg.org/resource/paper/0249366b62e75c7b",
     "citing_idx": 2,
-    "context_original": "cholinguistic plausibility. A second motivation for the project is to remedy the dearth of empirical results on pronoun resolution methods. Many small comparisons of methods have been made, such as by <mask> and OTHERCIT, but those usually consist of statistics based on a small handtested corpus. The problem with evaluating 1Henceforth BFP algorithms by hand is that it is time consuming and difficult to p",
+    "context_original": "cholinguistic plausibility. A second motivation for the project is to remedy the dearth of empirical results on pronoun resolution methods. Many small comparisons of methods have been made, such as by and OTHERCIT, but those usually consist of statistics based on a small handtested corpus. The problem with evaluating 1Henceforth BFP algorithms by hand is that it is time consuming and difficult to p",
     "clean_status": "ok"
   },
   {
@@ -60,23 +60,23 @@
     "cited_uri": "https://citekg.org/resource/paper/365a55beb5b2d906",
     "citing_uri": "https://citekg.org/resource/paper/0200169276885cbd",
     "citing_idx": 8,
-    "context_original": "erformed by (i) constraining the maximum allowed word movement and exponentially penalizing long reorderings (distortion limit and penalty), and (ii) through so-called lexicalized orientation models ( <mask> ; OTHERCIT). While the former is mainly aimed at reducing the computational complexity of the decoding algorithm, the latter assigns at each decoding step a score to the next source phrase to cover, a",
+    "context_original": "erformed by (i) constraining the maximum allowed word movement and exponentially penalizing long reorderings (distortion limit and penalty), and (ii) through so-called lexicalized orientation models ( ; OTHERCIT). While the former is mainly aimed at reducing the computational complexity of the decoding algorithm, the latter assigns at each decoding step a score to the next source phrase to cover, a",
     "clean_status": "ok"
   },
   {
-    "context": "Figure 1 shows a model long used in automatic speech recognition and recently proposed for machine translation, and for automatic spelling correction OTHERCIT [cite]. In speech recognition, y is an acoustic signal; in translation, y is a word sequence in another language; in spelling correction, y represents the misspelled input.",
+    "context": "Figure 1 shows a model long used in automatic speech recognition and recently proposed for machine translation, and for automatic spelling correction [cite]. In speech recognition, y is an acoustic signal; in translation, y is a word sequence in another language; in spelling correction, y represents the misspelled input.",
     "cited_uri": "https://citekg.org/resource/paper/496efb87ca651805",
     "citing_uri": "https://citekg.org/resource/paper/0323223f1e8ef0da",
     "citing_idx": 0,
-    "context_original": "Y) Figure 1 Source-channel setup. 2. Language Models Figure 1 shows a model that has long been used in automatic speech recognition  and has recently been proposed for machine translation ( <mask> and for automatic spelling correction . In automatic speech recognition, y is an acoustic signal; in machine translation, y is a sequence of words in another language; and in spelling correc",
+    "context_original": "Y) Figure 1 Source-channel setup. 2. Language Models Figure 1 shows a model that has long been used in automatic speech recognition  and has recently been proposed for machine translation ( and for automatic spelling correction . In automatic speech recognition, y is an acoustic signal; in machine translation, y is a sequence of words in another language; and in spelling correc",
     "clean_status": "ok"
   },
   {
-    "context": "Query expansion often follows word‑sense disambiguation to avoid irrelevant results; OTHERCIT used WordNet to obtain word senses [cite]. In contrast, Schütze and others built a corpus‑based thesaurus automatically.",
+    "context": "Query expansion often follows word‑sense disambiguation to avoid irrelevant results; [cite] used WordNet to obtain word senses . In contrast, Schütze and others built a corpus‑based thesaurus automatically.",
     "cited_uri": "https://citekg.org/resource/paper/3504f7ce6fede8d5",
     "citing_uri": "https://citekg.org/resource/paper/035b977c10819cad",
     "citing_idx": 5,
-    "context_original": "ries and indexed documents is often addressed through query expansion. Query expansion in turn is often preceded by Word sense disambiguation (WSD) in order to avoid retrieving irrelevant information. <mask> and OTHERCIT used WordNet  to obtain the sense of a word. In contrast, Sch¨utze and OTHERCIT and OTHERCIT used a corpus-based approach where they automatically constructed a thesaurus on the",
+    "context_original": "ries and indexed documents is often addressed through query expansion. Query expansion in turn is often preceded by Word sense disambiguation (WSD) in order to avoid retrieving irrelevant information. and OTHERCIT used WordNet  to obtain the sense of a word. In contrast, Sch¨utze and OTHERCIT and OTHERCIT used a corpus-based approach where they automatically constructed a thesaurus on the",
     "clean_status": "ok"
   }
 ]
