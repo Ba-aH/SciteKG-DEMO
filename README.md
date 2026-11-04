@@ -18,12 +18,18 @@ Clone the repository and set up a virtual environment:
 git clone https://github.com/Ba-aH/SciteKG-DEMO.git
 cd SciteKG-DEMO
 
+# Create virtual environment
 python -m venv venv
-on linux: source venv/bin/activate    
-on Windows: venv\Scripts\activate
 
+# Activate the virtual environment
+# On Linux / macOS:
+source venv/bin/activate
+
+# On Windows:
+venv\Scripts\activate
+
+# Install dependencies
 pip install -r requirements.txt
-```
 
 ## Features
 
